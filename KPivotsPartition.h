@@ -22,7 +22,6 @@ public :
 		}
 
 		while (qq <= q[k]-1){
-			T temp = A[qq];
 			if (A[qq]< pivots[0]){//کامل است
 				//جا به جایی
 				//ندارد 
@@ -38,16 +37,13 @@ public :
 
 			}else if (A[qq] > pivots[k-1]) {
 				//جا به جایی
-					T temp1 = A[q[2*k-1]-1];
 					T temp = A[qq];
 					A[qq] = A[q[2*k-1]-1];
 					A[q[2*k-1]-1] = temp;
 						
-
 					for(int j=k+k-1 ; j>k ; j--){
 						if (q[j] > q[j-1]){
 							T temp = A[qq];
-							T temp1 = A[q[j-1]-1];
 							A[qq] = A[q[j-1]-1];
 							A[q[j-1]-1] = temp;
 						}
@@ -59,23 +55,20 @@ public :
 					}
 
 					//تغییر مقدار خودش
-					//q[k+i]--;
+					//q[k+i]--; داخل حلقه بالا اضافه شد 
 
 					//کنترل حرکت
-					//qq++;
 					kk--;
 
 			} else {
 				for (int i =0 ; i<k ; i++){
 					if (A[qq] == pivots[i]){
 						//جا به جایی
-						T temp1 = A[q[i]];
 						T temp = A[qq];
 						A[qq] = A[q[i]];
 						A[q[i]] = temp;
 						for(int j=i ; j<k-1 ; j++){
 							if (q[j] < q[j+1]){
-								T temp1 = A[q[j+1]];
 								T temp = A[qq];
 								A[qq] = A[q[j+1]];
 								A[q[j+1]] = temp;
@@ -88,7 +81,7 @@ public :
 						}
 
 						//تغییر مقدار خودش
-						//q[i]++;
+						//q[i]++; داخل حلقه بالا اضافه شد 
 
 						//کنترل حرکت
 						qq++;
@@ -98,7 +91,6 @@ public :
 					}else if (A[qq] < pivots[i] ) {
 						if (A[qq] > pivots[i-1]){
 							//جا به جایی
-							T temp1 = A[q[i+k]-1];
 							T temp = A[qq];
 							A[qq] = A[q[i+k]-1];
 							A[q[i+k]-1] = temp;
@@ -106,7 +98,6 @@ public :
 							for(int j=i+k ; j>k-1 ; j--){
 								if (q[j+1] > q[j]){
 									T temp = A[qq];
-									T temp1 = A[q[j]-1];
 									A[qq] = A[q[j]-1];
 									A[q[j]-1] = temp;
 								}
@@ -118,10 +109,9 @@ public :
 							}
 
 							//تغییر مقدار خودش
-							//q[k+i]--;
+							//q[k+i]--;داخل حلقه بالا اضافه شد
 
 							//کنترل حرکت
-							//qq++;
 							kk--;
 
 							break;
