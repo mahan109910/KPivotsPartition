@@ -14,8 +14,6 @@ public :
 		// مقدار دادن اولیه
 		int qq=p;
 		int kk=r+1;
-		//q[-1] = -1;
-		q[k] = 1000;
 		for (int i= 0 ; i< k ; i++){
 			q[i]=p;
 		}
@@ -23,75 +21,114 @@ public :
 			q[i]=r+1;
 		}
 
-		while (qq < kk){
-			if (A[qq]< pivots[0]){
+		while (qq <= q[k]-1){
+			T temp = A[qq];
+			if (A[qq]< pivots[0]){//کامل است
 				//جا به جایی
 				//ندارد 
 
 				//درست کردن مقدار بقیه
-				for (int j=0 ; j<k ; j++){
-					q[j]++;
-				}
+				//ندارد
 
 				//تغییر مقدار خودش
-				//q[k]++;
+				//ندارد
 
 				//کنترل حرکت
 				qq++;
 
-			}else {
-			for (int i =1 ; i<k ; i++){
-				if (A[qq] == pivots[i]){// کامل است 
-					//جا به جایی
+			}else if (A[qq] > pivots[k-1]) {
+				//جا به جایی
+					T temp1 = A[q[2*k-1]-1];
 					T temp = A[qq];
-					A[qq] = A[q[i]];
-					A[q[i]] = temp;
-					for(int j=i ; j<k ; j++){
-						if (q[i] < q[i+1]){
+					A[qq] = A[q[2*k-1]-1];
+					A[q[2*k-1]-1] = temp;
+						
+
+					for(int j=k+k-1 ; j>k ; j--){
+						if (q[j] > q[j-1]){
 							T temp = A[qq];
-							A[qq] = A[q[i+1]];
-							A[q[i+1]] = temp;
+							T temp1 = A[q[j-1]-1];
+							A[qq] = A[q[j-1]-1];
+							A[q[j-1]-1] = temp;
 						}
 					}
 
 					//درست کردن مقدار بقیه
-					for (int j=i ; j< k ; j++){
-						q[j]++;
+					for (int j=k+k-1 ; j>k-1 ; j--){
+						q[j]--;
 					}
 
 					//تغییر مقدار خودش
-					//q[i]++;
+					//q[k+i]--;
 
 					//کنترل حرکت
-					qq++;
+					//qq++;
+					kk--;
 
-					break;
-
-				}else if (A[qq] < pivots[i] ) {
-					if (A[qq] > pivots[i-1]){
+			} else {
+				for (int i =0 ; i<k ; i++){
+					if (A[qq] == pivots[i]){
 						//جا به جایی
-						/*T temp = A[qq];
-						A[qq] = A[q[i+k]];
-						A[q[i+k]] = temp;*/
+						T temp1 = A[q[i]];
+						T temp = A[qq];
+						A[qq] = A[q[i]];
+						A[q[i]] = temp;
+						for(int j=i ; j<k-1 ; j++){
+							if (q[j] < q[j+1]){
+								T temp1 = A[q[j+1]];
+								T temp = A[qq];
+								A[qq] = A[q[j+1]];
+								A[q[j+1]] = temp;
+							}
+						}
 
 						//درست کردن مقدار بقیه
-						for (int j=i+k-1 ; j>k-1 ; j--){
-							q[j]--;
+						for (int j=i ; j< k ; j++){
+							q[j]++;
 						}
 
 						//تغییر مقدار خودش
-						//q[k+i]--;
+						//q[i]++;
 
 						//کنترل حرکت
 						qq++;
-						//kk--;
 
-					break;
+						break;
 
+					}else if (A[qq] < pivots[i] ) {
+						if (A[qq] > pivots[i-1]){
+							//جا به جایی
+							T temp1 = A[q[i+k]-1];
+							T temp = A[qq];
+							A[qq] = A[q[i+k]-1];
+							A[q[i+k]-1] = temp;
+
+							for(int j=i+k ; j>k-1 ; j--){
+								if (q[j+1] > q[j]){
+									T temp = A[qq];
+									T temp1 = A[q[j]-1];
+									A[qq] = A[q[j]-1];
+									A[q[j]-1] = temp;
+								}
+							}
+
+							//درست کردن مقدار بقیه
+							for (int j=i+k-1 ; j>k-1 ; j--){
+								q[j]--;
+							}
+
+							//تغییر مقدار خودش
+							//q[k+i]--;
+
+							//کنترل حرکت
+							//qq++;
+							kk--;
+
+							break;
+						}
 					}
 				}
 			}
-			}		
 		}
 	}
 };
